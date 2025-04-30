@@ -1,0 +1,61 @@
+PID  PType PT   VT   FT   WT   TT   Cancel Resc
+P50  N     97   105  229  98   26   F      F
+P49  N     101  95   212  111  6    F      T
+P42  N     94   85   209  113  11   F      T
+P44  N     89   89   203  102  12   T      F
+P43  R     89   89   200  90   21   F      F
+P48  R     84   92   191  75   24   F      F
+P47  N     87   90   188  88   10   F      F
+P39  N     83   81   178  73   24   F      T
+P45  R     84   90   177  69   18   F      F
+P46  N     81   90   176  71   15   F      F
+P35  N     85   78   171  74   19   F      T
+P32  N     81   72   165  79   14   F      F
+P38  R     83   81   161  56   24   F      F
+P41  N     76   83   151  50   18   F      F
+P37  R     78   80   150  51   19   F      F
+P33  N     69   73   146  52   21   F      F
+P31  N     78   72   146  55   19   F      T
+P30  R     78   68   144  44   32   F      F
+P40  N     75   82   140  46   12   F      F
+P23  N     76   58   135  64   13   F      T
+P29  N     62   66   121  20   35   F      F
+P20  N     66   55   120  55   10   F      T
+P34  R     83   77   117  22   18   F      T
+P25  N     59   62   114  39   13   F      F
+P27  N     57   65   109  24   20   F      F
+P28  R     56   65   109  20   24   F      F
+P36  N     77   78   109  19   12   F      F
+P26  R     62   63   105  34   8    F      F
+P17  N     51   46   103  37   20   F      F
+P18  N     48   49   96   19   28   F      F
+P19  N     60   50   96   37   9    F      T
+P24  N     59   61   94   18   15   F      F
+P21  R     53   56   87   12   19   F      F
+P22  N     57   56   86   13   17   F      F
+P15  N     34   42   79   13   24   F      F
+P16  N     46   46   75   16   13   F      F
+P9   R     24   32   69   17   20   F      F
+P11  R     31   34   66   11   21   F      F
+P8   N     35   27   62   28   7    T      F
+P13  R     50   40   59   11   8    F      F
+P12  R     36   39   58   6    13   F      F
+P2   N     23   22   55   4    29   F      F
+P4   N     21   23   54   5    26   F      F
+P14  R     43   41   50   2    7    F      F
+P6   R     20   26   49   9    14   F      F
+P7   N     23   27   41   9    5    T      F
+P1   N     26   20   40   7    13   F      T
+P10  R     36   33   37   4    0    T      F
+P3   N     32   23   36   9    4    F      F
+P5   N     27   25   30   2    3    F      F
+
+Total number of timesteps = 230
+Total number of All, N, R = 50, 33, 17
+Average total waiting time of All, N, R = 39.66, 43.9394, 31.3529
+Average total treatment time  of All, N, R = 16.26, 15.8485, 17.0588
+Percentage of patients that accepted cancellation (%) = 8 %
+Percentage of patients that accepted rescheduling (%) = 20 %
+there is line here for early % aka Pearly
+there is line here for late % aka Plate
+there is line here for avg late pen aka latePen
