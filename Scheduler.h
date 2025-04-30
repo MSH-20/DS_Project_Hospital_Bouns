@@ -188,7 +188,7 @@ public:
 						if (P3->getPID() == P2->getPID())
 						{
 							found = true;
-							}
+						}
 						else
 						{
 							temp.enqueue(P3, dummy);
@@ -212,13 +212,13 @@ public:
 		{
 			In_Treatment.peek(P2, dummy);
 			P2->getFirstRequired(T);
+			Resources* R = P2->getAttachedResource();
 			if (T->getTypet() == E)
 			{
 				P2->setW();
 				In_Treatment.dequeue(P2, dummy);
 				E_Interrupted_Patients.enqueue(P2, dummy);
 				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
-				Resources* R = P2->getAttachedResource();
 				R->decAttachedPatientsCount();
 				R->setFT();
 				E_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
@@ -230,7 +230,6 @@ public:
 				In_Treatment.dequeue(P2, dummy);
 				U_Interrupted_Patients.enqueue(P2, dummy);
 				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
-				Resources* R = P2->getAttachedResource();
 				R->decAttachedPatientsCount();
 				R->setFT();
 				U_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
@@ -507,15 +506,15 @@ public:
 
 
 			//----------------------------------------------------Bouns-------------------------------------------------------//
-			//srand(time(0));
-			//X = rand() % 101;
-			//if (X < PBusyFail)
-			//{
-			//	if (!In_Treatment.isEmpty())
-			//	{
-			//		Busy_Failure(timestep);
-			//	}
-			//}
+			srand(time(0));
+			X = rand() % 101;
+			if (X < PBusyFail)
+			{
+				if (!In_Treatment.isEmpty())
+				{
+					Busy_Failure(timestep);
+				}
+			}
 
 
 			while (E_Maintenance_Devices.peek(R2, dummy) && (-dummy) <= timestep)
@@ -828,7 +827,7 @@ public:
 			timestep++;
 			Finished_PatientsCount = Finished_Patients.GetCount();
 		}
-		ui.outputfile(Finished_Patients, E_Devices, U_Devices, timestep);
+		ui.outputfile(Finished_Patients, E_Devices, U_Devices, E_Maintenance_Devices, U_Maintenance_Devices, timestep);
 
 	}
 

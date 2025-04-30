@@ -135,7 +135,12 @@ public:
         cin.ignore();
     }
 
-    void outputfile(ArrayStack<Patient*>& Patients, LinkedQueue<Resources*>& E_Devices, LinkedQueue<Resources*>& U_Deivces, int timestep)
+    void outputfile(ArrayStack<Patient*>& Patients, 
+        LinkedQueue<Resources*>& E_Devices, 
+        LinkedQueue<Resources*>& U_Deivces, 
+        priQueue<Resources*>& E_Maintenance_Devices, 
+        priQueue<Resources*>& U_Maintenance_Devices, 
+        int timestep)
     {
         string filename;
 
@@ -298,6 +303,9 @@ public:
             }
             
         }
+
+        int E_Count = E_Devices.GetCount();
+        int U_Count = U_Deivces.GetCount();
         while (!E_Devices.isEmpty())
         {
             Resources* R;
@@ -305,7 +313,7 @@ public:
                 E_FDF += R->getFT();
         }
 
-        while (!E_Devices.isEmpty())
+        while (!U_Deivces.isEmpty())
         {
             Resources* R;
             if (U_Deivces.dequeue(R))
@@ -324,7 +332,7 @@ public:
         accCP = accCP / totalnumber * 100;
         accRP = accRP / totalnumber * 100;
 
-        FDF = ((E_FDF + U_FDF) / (E_Devices.GetCount() + U_Deivces.GetCount())) * 100;
+        FDF = ((E_FDF + U_FDF + (E_Maintenance_Devices.GetCount() + U_Maintenance_Devices.GetCount())) / (E_Count + U_Count + E_Maintenance_Devices.GetCount() + U_Maintenance_Devices.GetCount())) * 100;
 
         outFile << "\nTotal number of timesteps = " << timestep << endl;
         outFile << "Total number of All, N, R = " << totalnumber << ", " << Nnumber << ", " << Rnumber << endl;
