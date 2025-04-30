@@ -20,6 +20,10 @@ public:
 	Treatment(int duration);
 	int getDuration() const;
 	void setDuration(int d);
+	//--------------------------------Bouns----------------------------------------//
+	int getAssignmentTime() const;
+	void setAssignmentTime(int d);
+	//--------------------------------Bouns----------------------------------------//
 	Resources*& getAssignedResource();
 	void setAssignedResource(Resources*& r);
 	void setTypet(Type t);

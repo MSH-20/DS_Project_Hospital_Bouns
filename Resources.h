@@ -10,7 +10,16 @@ protected:
 	int attachedPatientsCount = 0; // Number of patients attached to the gym
 	int ID;
 	Type type;
+	//--------------------------------------------------------Bouns-------------------------------------------------------//
+	int Maintenance_Time;
 public:
+
+	int getMaintenance_Time()
+	{
+		return Maintenance_Time;
+	}
+
+	//--------------------------------------------------------Bouns-------------------------------------------------------//
 	virtual Type getType() const
 	{
 		return type;
@@ -94,10 +103,11 @@ class ETherapy : public Resources
 private:
 	static int nextID;
 public:
-	ETherapy() {
+	ETherapy(int MT) {
 		cap = 1;
 		type = E;
 		ID = nextID++;
+		Maintenance_Time = MT;
 	}
 };
 
@@ -106,10 +116,11 @@ class UTherapy : public Resources
 private:
 	static int nextID;
 public:
-	UTherapy() {
+	UTherapy(int MT) {
 		cap = 1;
 		type = U;
 		ID = nextID++;
+		Maintenance_Time = MT;
 	}
 };
 ostream& operator<<(ostream& os, const Resources* p);

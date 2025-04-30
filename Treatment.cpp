@@ -13,6 +13,18 @@ Treatment::Treatment(int duration){
 	assignmenttime = 0;
 	assignedResource = nullptr;
 }
+
+//--------------------------------Bouns----------------------------------------//
+
+int Treatment::getAssignmentTime() const
+{
+	return assignmenttime;
+}
+void Treatment::setAssignmentTime(int t)
+{
+	assignmenttime = t;
+}
+//--------------------------------Bouns----------------------------------------//
 int Treatment::getDuration() const {
 	return duration;
 }
