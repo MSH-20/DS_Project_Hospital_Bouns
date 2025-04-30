@@ -209,9 +209,15 @@ public:
 			else
 			{
 				In_Treatment.peek(P2, dummy);
-				if (P2->getAttachedResource()->getType() == E || P2->getAttachedResource()->getType() == U)
+				if (P2->getAttachedResource()->getType() == E)
 				{
 					In_Treatment.dequeue(P2, dummy);
+					E_Interrupted_Patients.enqueue(P2, dummy);
+				}
+				if (P2->getAttachedResource()->getType() == U)
+				{
+					In_Treatment.dequeue(P2, dummy);
+					U_Interrupted_Patients.enqueue(P2, dummy);
 				}
 			}
 
@@ -487,15 +493,15 @@ public:
 
 
 			//----------------------------------------------------Bouns-------------------------------------------------------//
-			srand(time(0));
-			X = rand() % 101;
-			if (X < PBusyFail)//reschedule case
-			{
-				if (In_Treatment.peek(P,dummy))
-				{
-					Busy_Failure(timestep);
-				}
-			}
+			//srand(time(0));
+			//X = rand() % 101;
+			//if (X < PBusyFail)//reschedule case
+			//{
+			//	if (In_Treatment.peek(P,dummy))
+			//	{
+			//		Busy_Failure(timestep);
+			//	}
+			//}
 
 
 			while (E_Maintenance_Devices.peek(R2, dummy) && (-dummy) <= timestep)
