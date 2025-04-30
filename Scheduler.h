@@ -81,30 +81,31 @@ public:
 
 	void Busy_Failure(int timestep)
 	{
-		srand(time(0));
+		
 		int x, dummy;
 		Patient* P2 = nullptr;
 		Patient* P3;
 		Treatment* T;
 		priQueue<Patient*> temp2;
 
+		int y = In_Treatment.GetCount();
+		bool found = false;
 
-		if (!In_Treatment.isEmpty())
+		if (y == 1)     // check the number of patients in In_Treatment
 		{
-			int y = In_Treatment.GetCount();
-			bool found = false;
-			if (y == 1)
-			{
-				x = 0;
-			}
-			else
-			{
-				x = ((rand()) % y) + 1;
-			}
-			if (x)
-			{
-				priQueue<Patient*> temp = In_Treatment;
-				while (!found && !temp.isEmpty())
+			x = 0;
+		}
+		else
+		{
+			srand(time(0));
+			x = ((rand()) % y) + 1;
+		}
+
+
+		if (x)        // based on count
+		{
+			priQueue<Patient*> temp = In_Treatment;
+			while ((!found) && !(temp.isEmpty()))            //to find random patient
 				{
 					for (int i = 0; i < (x-1); i++)
 					{
@@ -125,8 +126,11 @@ public:
 							temp.enqueue(P2, dummy);
 						}
 						y--;
-						if(y)
-						x = ((rand()) % y) + 1;
+						if (y)
+						{
+							srand(time(0));
+							x = ((rand()) % y) + 1;
+						}
 					}
 					else
 					{
@@ -134,94 +138,89 @@ public:
 					}
 				}
 
-				if (found)
-				{
-					P2->getFirstRequired(T);
-					if (T->getTypet() == E)
-					{
-						// edit
-						P2->setW();
-						
-						E_Interrupted_Patients.enqueue(P2, dummy);
-					}
-					if (T->getTypet() == U)
-					{
-						// edit
-						P2->setW();
-						
-						U_Interrupted_Patients.enqueue(P2, dummy);
-					}
-					T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
-
-					Resources* R = P2->getAttachedResource();
-					R->decAttachedPatientsCount();
-
-					if (R->getType() == E)
-					{
-						R->setFT();
-						E_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
-						P2->removeAttachedResource();
-						//R = nullptr;
-					}
-					if (R->getType() == U)
-					{
-						R->setFT();
-						U_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
-						P2->removeAttachedResource();
-						//R = nullptr;
-					}
-					//P2->addAttachedResource(nullptr); to remove the attached device from it
-
-					//we now remove the patient from the In_Treatment list
-					
-					found = false;
-					while (!temp.isEmpty())
-					{
-						temp.dequeue(P3, dummy);
-					}
-					while ((!In_Treatment.isEmpty()) && (!found))
-					{
-						if (In_Treatment.dequeue(P3, dummy))
-						{
-							if (P3->getPID() == P2->getPID())
-							{
-								found = true;
-							}
-							else
-							{
-								temp.enqueue(P3, dummy);
-							}
-						}
-
-					}
-					while (!In_Treatment.isEmpty())
-					{
-						In_Treatment.dequeue(P3, dummy);
-						temp.enqueue(P3, dummy);
-					}
-					while (!temp.isEmpty())
-					{
-						temp.dequeue(P3, dummy);
-						In_Treatment.enqueue(P3, dummy);
-					}
-				}
-			}
-			else
+			if (found)          // if the patient found
 			{
-				In_Treatment.peek(P2, dummy);
-				if (P2->getAttachedResource()->getType() == E)
+				P2->getFirstRequired(T);
+				if (T->getTypet() == E)
 				{
-					In_Treatment.dequeue(P2, dummy);
+					// edit
+					P2->setW();					
 					E_Interrupted_Patients.enqueue(P2, dummy);
 				}
-				if (P2->getAttachedResource()->getType() == U)
+				if (T->getTypet() == U)
 				{
-					In_Treatment.dequeue(P2, dummy);
+					// edit
+					P2->setW();				
 					U_Interrupted_Patients.enqueue(P2, dummy);
 				}
+				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));     ///// case duration 1 and 0
+
+				Resources* R = P2->getAttachedResource();
+				R->decAttachedPatientsCount();
+
+				if (R->getType() == E)
+				{
+					R->setFT();
+					E_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+					P2->removeAttachedResource();
+					//R = nullptr;
+				}
+				if (R->getType() == U)
+				{
+					R->setFT();
+					U_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+					P2->removeAttachedResource();
+					//R = nullptr;
+				}
+				//P2->addAttachedResource(nullptr); to remove the attached device from it
+
+				//we now remove the patient from the In_Treatment list
+					
+				found = false;
+				while (!temp.isEmpty())
+				{
+					temp.dequeue(P3, dummy);
+				}
+				while ((!In_Treatment.isEmpty()) && (!found))
+				{
+					if (In_Treatment.dequeue(P3, dummy))
+					{
+						if (P3->getPID() == P2->getPID())
+						{
+							found = true;
+							}
+						else
+						{
+							temp.enqueue(P3, dummy);
+						}
+					}
+
+				}
+				while (!In_Treatment.isEmpty())
+				{
+					In_Treatment.dequeue(P3, dummy);
+					temp.enqueue(P3, dummy);
+				}
+				while (!temp.isEmpty())
+				{
+					temp.dequeue(P3, dummy);
+					In_Treatment.enqueue(P3, dummy);
+				}
 			}
-
-
+		}
+		else         // in case In_Treatment has only one patient
+		{
+			In_Treatment.peek(P2, dummy);
+			if (P2->getAttachedResource()->getType() == E)
+			{
+				In_Treatment.dequeue(P2, dummy);
+				E_Interrupted_Patients.enqueue(P2, dummy);
+			}
+			if (P2->getAttachedResource()->getType() == U)
+			{
+				In_Treatment.dequeue(P2, dummy);
+				U_Interrupted_Patients.enqueue(P2, dummy);
+			}
 		}
 	}
 
@@ -495,9 +494,9 @@ public:
 			//----------------------------------------------------Bouns-------------------------------------------------------//
 			//srand(time(0));
 			//X = rand() % 101;
-			//if (X < PBusyFail)//reschedule case
+			//if (X < PBusyFail)
 			//{
-			//	if (In_Treatment.peek(P,dummy))
+			//	if (!In_Treatment.isEmpty())
 			//	{
 			//		Busy_Failure(timestep);
 			//	}

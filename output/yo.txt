@@ -3,11 +3,14 @@ P50  N     97   105  145  14   26   F      F
 P48  R     84   92   129  13   24   F      F
 P45  R     84   90   123  15   18   F      F
 P46  N     81   90   120  15   15   F      F
+P43  R     89   89   118  8    21   F      F
 P29  N     62   66   117  16   35   F      F
-P37  R     78   80   116  17   19   F      F
+P44  N     89   89   115  9    17   F      F
 P47  N     87   90   114  14   10   F      F
 P41  N     76   83   113  12   18   F      F
-P43  R     89   89   111  1    21   F      F
+P37  R     78   80   113  14   19   F      F
+P39  N     82   81   112  7    24   F      F
+P30  R     78   68   112  12   32   F      F
 P38  R     83   81   109  4    24   F      F
 P49  N     100  95   107  6    6    F      F
 P40  N     75   82   106  12   12   F      F
@@ -15,48 +18,45 @@ P35  N     84   78   105  8    19   F      F
 P28  R     56   65   105  16   24   F      F
 P27  N     57   65   104  19   20   F      F
 P42  N     93   85   104  8    11   F      F
-P44  N     89   89   103  2    12   T      F
-P39  N     82   81   102  3    18   T      F
+P33  N     69   73   102  8    21   F      F
 P34  R     82   77   101  6    18   F      F
-P30  R     78   68   101  12   21   T      F
-P33  N     69   73   98   8    17   T      F
+P31  N     76   72   97   6    19   F      F
 P32  N     81   72   95   9    14   F      F
 P36  N     77   78   92   2    12   F      F
-P31  N     76   72   88   6    10   T      F
 P26  R     62   63   87   16   8    F      F
+P22  N     57   56   84   11   17   F      F
 P18  N     48   49   84   7    28   F      F
+P25  N     59   62   82   7    13   F      F
 P24  N     59   61   82   6    15   F      F
 P21  R     53   56   81   6    19   F      F
 P15  N     34   42   79   13   24   F      F
 P23  N     64   58   77   6    13   F      F
-P25  N     59   62   77   7    8    T      F
-P22  N     57   56   75   2    17   F      F
 P17  N     51   46   73   7    20   F      F
 P20  N     59   55   69   4    10   F      F
+P9   R     24   32   67   15   20   F      F
 P19  N     58   50   67   8    9    F      F
 P11  R     31   34   66   11   21   F      F
-P9   R     24   32   65   13   20   F      F
+P12  R     36   39   62   10   13   F      F
 P13  R     50   40   59   11   8    F      F
 P16  N     46   46   59   0    13   F      F
-P12  R     36   39   58   6    13   F      F
+P8   N     35   27   59   10   22   F      F
 P4   N     21   23   54   5    26   F      F
 P2   N     23   22   53   2    29   F      F
 P14  R     43   41   50   2    7    F      F
+P10  R     36   33   50   4    13   F      F
 P6   R     20   26   49   9    14   F      F
-P8   N     35   27   44   10   7    T      F
-P7   N     23   27   41   9    5    T      F
+P7   N     23   27   47   9    11   F      F
 P1   N     25   20   39   6    13   F      F
-P10  R     36   33   37   4    0    T      F
 P3   N     32   23   36   9    4    F      F
 P5   N     27   25   30   2    3    F      F
 
 Total number of timesteps = 146
 Total number of All, N, R = 50, 33, 17
-Average total waiting time of All, N, R = 8.38, 7.78788, 9.52941
-Average total treatment time  of All, N, R = 15.56, 15.1212, 16.4118
-Percentage of patients that accepted cancellation (%) = 18 %
+Average total waiting time of All, N, R = 8.98, 8.39394, 10.1176
+Average total treatment time  of All, N, R = 17.04, 16.6364, 17.8235
+Percentage of patients that accepted cancellation (%) = 0 %
 Percentage of patients that accepted rescheduling (%) = 0 %
-Percentage of free devices that failed (%) = 100 %
+Percentage of free devices that failed (%) = 0 %
 there is line here for early % aka Pearly
 there is line here for late % aka Plate
 there is line here for avg late pen aka latePen
