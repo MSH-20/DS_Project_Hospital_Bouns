@@ -155,15 +155,19 @@ public:
         }
 
         outFile << "PID  PType PT   VT   FT   WT   TT   Cancel Resc" << endl;
-        float totalnumber, Nnumber, Rnumber, Wall, WR, WN, Tall, TN, TR, accCP, accRP, FDF, E_FDF, U_FDF;
+        float totalnumber, Nnumber, Rnumber, Wall, WR, WN, Tall, TN, TR, accCP, accRP, IP, FDF, E_FDF, U_FDF;
         float Pearly, Plate, latePen;
 
-        totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = E_FDF = U_FDF = FDF = 0;
+        totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = IP = E_FDF = U_FDF = FDF = 0;
 
         while (!Patients.isEmpty())
         {
             Patient* temp;
             Patients.pop(temp);
+
+            //--------------------------------------------------------Bouns-------------------------------------------------------//
+            IP += temp->getIP();
+            //--------------------------------------------------------Bouns-------------------------------------------------------//
 
             if (temp->getPID() < 10)
             {
@@ -345,7 +349,7 @@ public:
 
         //--------------------------------------------------------Bouns-------------------------------------------------------//
         outFile << "Percentage of free devices that failed (%) = " << FDF << " %\n";
-        //outFile << "Percentage of patients that accepted rescheduling (%) = " << accRP << " %\n";
+        outFile << "Percentage of Interrupted patients (%) = " << ((IP/totalnumber) * 100) << " %\n";
         //--------------------------------------------------------Bouns-------------------------------------------------------//
 
 

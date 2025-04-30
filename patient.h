@@ -16,6 +16,7 @@ class Patient
 	int TW;		// Total waiting time for this patient
 	int TT;		// Total treatment time for this patient
 	int XT;
+	int IP;
 	LinkedQueue<Treatment*> RequiredTreatements; // for the time needed for each treatment
 	Patient_status PS;
 	bool canceled;// Whether doing an accepted cancel	
@@ -35,10 +36,24 @@ public:
 		FT = 0;
 		TW = 0;
 		TT = 0;
+		IP = 0;
 		canceled = false;
 		rescheduled = false;
 		PS = IDLE;
 	}
+
+	//--------------------------------------------------------Bouns-------------------------------------------------------//
+
+	void setIP()
+	{
+		IP = 1;
+	}
+
+	int getIP()
+	{
+		return IP;
+	}
+
 	bool isCanceled() const {
 		return canceled;
 	}

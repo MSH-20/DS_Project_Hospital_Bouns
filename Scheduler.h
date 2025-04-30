@@ -144,13 +144,15 @@ public:
 				if (T->getTypet() == E)
 				{
 					// edit
-					P2->setW();					
+					P2->setW();
+					P2->setIP();
 					E_Interrupted_Patients.enqueue(P2, dummy);
 				}
 				if (T->getTypet() == U)
 				{
 					// edit
-					P2->setW();				
+					P2->setW();
+					P2->setIP();
 					U_Interrupted_Patients.enqueue(P2, dummy);
 				}
 				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));     ///// case duration 1 and 0
@@ -216,6 +218,7 @@ public:
 			if (T->getTypet() == E)
 			{
 				P2->setW();
+				P2->setIP();
 				In_Treatment.dequeue(P2, dummy);
 				E_Interrupted_Patients.enqueue(P2, dummy);
 				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
@@ -227,6 +230,7 @@ public:
 			else if (T->getTypet() == U)
 			{
 				P2->setW();
+				P2->setIP();
 				In_Treatment.dequeue(P2, dummy);
 				U_Interrupted_Patients.enqueue(P2, dummy);
 				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
