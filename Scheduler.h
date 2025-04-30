@@ -482,11 +482,6 @@ public:
 			//	}
 			//}
 
-			if (E_Maintenance_Devices.GetCount() > 1 || U_Maintenance_Devices.GetCount() > 1)
-			{
-				int x = 5, y;
-				y = x + 5;
-			}
 
 			//----------------------------------------------------Bouns-------------------------------------------------------//
 			srand(time(0));
@@ -556,7 +551,7 @@ public:
 				P3->setS();
 				E_Devices.dequeue(R);
 				bool x = false;
-				while ((!Free_Failure(R, timestep)) && (!x))
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
 					if (!E_Devices.dequeue(R))
 					{
@@ -585,7 +580,7 @@ public:
 				P3->setS();
 				U_Devices.dequeue(R);
 				bool x = false;
-				while ((!Free_Failure(R, timestep)) && (!x))
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
 					if (!U_Devices.dequeue(R))
 					{
@@ -615,7 +610,7 @@ public:
 				P3->setS();
 				E_Devices.dequeue(R);
 				bool x = false;
-				while ((!Free_Failure(R, timestep)) && (!x))
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
 					if (!E_Devices.dequeue(R))
 					{
@@ -648,7 +643,7 @@ public:
 				P3->setS();
 				U_Devices.dequeue(R);
 				bool x = false;
-				while ((!Free_Failure(R, timestep)) && (!x))
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
 					if (!U_Devices.dequeue(R))
 					{
