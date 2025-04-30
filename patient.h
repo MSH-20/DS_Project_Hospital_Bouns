@@ -162,6 +162,12 @@ public:
 		RequiredTreatements.peek(temp);
 		return temp->getAssignedResource();
 	}
+
+	void removeAttachedResource() {
+		Treatment* temp;
+		RequiredTreatements.peek(temp);
+		temp->resetAssignedResource();
+	}
 	void addTreat(int s, char t)
 	{
 		Treatment* temp;

@@ -139,27 +139,32 @@ public:
 					{
 						// edit
 						P2->setW();
+						
 						E_Interrupted_Patients.enqueue(P2, dummy);
 					}
 					if (T->getTypet() == U)
 					{
 						// edit
 						P2->setW();
+						
 						U_Interrupted_Patients.enqueue(P2, dummy);
 					}
 					T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
 
 					Resources* R = P2->getAttachedResource();
+					R->decAttachedPatientsCount();
+
 					if (R->getType() == E)
 					{
-						R->decAttachedPatientsCount();
 						E_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+						P2->removeAttachedResource();
 						//R = nullptr;
 					}
 					if (R->getType() == U)
 					{
 						R->decAttachedPatientsCount();
 						U_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+						P2->removeAttachedResource();
 						//R = nullptr;
 					}
 					//P2->addAttachedResource(nullptr); to remove the attached device from it
@@ -477,7 +482,11 @@ public:
 			//	}
 			//}
 
-
+			if (E_Maintenance_Devices.GetCount() > 1 || U_Maintenance_Devices.GetCount() > 1)
+			{
+				int x = 5, y;
+				y = x + 5;
+			}
 
 			//----------------------------------------------------Bouns-------------------------------------------------------//
 			srand(time(0));
@@ -566,6 +575,10 @@ public:
 					}
 					E_Interrupted_Patients.dequeue(P3, dummy);
 				}
+				else
+				{
+					P3->setW();
+				}
 			}
 
 			while (U_Devices.peek(R) && U_Interrupted_Patients.peek(P3, dummy)) {//going out of U_waiting to In_treatment
@@ -590,6 +603,10 @@ public:
 						T->setAssignmentTime(timestep);
 					}
 					U_Interrupted_Patients.dequeue(P3, dummy);
+				}
+				else
+				{
+					P3->setW();
 				}
 			}
 

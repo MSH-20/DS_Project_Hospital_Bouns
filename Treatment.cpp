@@ -34,6 +34,11 @@ Resources*& Treatment::getAssignedResource() {
 void Treatment::setAssignedResource(Resources*& r) {
 	assignedResource = r;
 }
+
+void Treatment::resetAssignedResource() {
+	assignedResource = nullptr;
+}
+
 void Treatment::setTypet(Type t) {
 	this->t = t;
 }

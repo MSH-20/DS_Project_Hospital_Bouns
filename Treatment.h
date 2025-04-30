@@ -26,6 +26,7 @@ public:
 	//--------------------------------Bouns----------------------------------------//
 	Resources*& getAssignedResource();
 	void setAssignedResource(Resources*& r);
+	void resetAssignedResource();
 	void setTypet(Type t);
 	Type getTypet();
 	virtual bool CanAssign(Scheduler* s) = 0;
