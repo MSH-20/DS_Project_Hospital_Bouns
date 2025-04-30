@@ -16,11 +16,11 @@ public:
     priQueue(const priQueue<T>& LQ)
     {
         head = nullptr;
-        int x;
+        int dummy;
         priNode<T>* NodePtr = LQ.head;	//start at the front node in LQ
         while (NodePtr)
         {
-            enqueue(NodePtr->getItem(x), x);	//get data of each node and enqueue it in this queue 
+            enqueue(NodePtr->getItem(dummy), NodePtr->getPri());	//get data of each node and enqueue it in this queue 
             NodePtr = NodePtr->getNext();
         }
     }

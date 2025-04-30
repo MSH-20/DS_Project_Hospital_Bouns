@@ -24,21 +24,21 @@ P31  N     76   72   97   6    19   F      F
 P32  N     81   72   95   9    14   F      F
 P36  N     77   78   92   2    12   F      F
 P26  R     62   63   87   16   8    F      F
-P22  N     57   56   84   11   17   F      F
 P18  N     48   49   84   7    28   F      F
-P25  N     59   62   82   7    13   F      F
+P22  N     57   56   84   11   17   F      F
 P24  N     59   61   82   6    15   F      F
+P25  N     59   62   82   7    13   F      F
 P21  R     53   56   81   6    19   F      F
 P15  N     34   42   79   13   24   F      F
 P23  N     64   58   77   6    13   F      F
 P17  N     51   46   73   7    20   F      F
 P20  N     59   55   69   4    10   F      F
-P9   R     24   32   67   15   20   F      F
 P19  N     58   50   67   8    9    F      F
+P9   R     24   32   67   15   20   F      F
 P11  R     31   34   66   11   21   F      F
 P12  R     36   39   62   10   13   F      F
-P13  R     50   40   59   11   8    F      F
 P16  N     46   46   59   0    13   F      F
+P13  R     50   40   59   11   8    F      F
 P8   N     35   27   59   10   22   F      F
 P4   N     21   23   54   5    26   F      F
 P2   N     23   22   53   2    29   F      F
@@ -56,7 +56,7 @@ Average total waiting time of All, N, R = 8.98, 8.39394, 10.1176
 Average total treatment time  of All, N, R = 17.04, 16.6364, 17.8235
 Percentage of patients that accepted cancellation (%) = 0 %
 Percentage of patients that accepted rescheduling (%) = 0 %
-Percentage of free devices that failed (%) = 0 %
+Percentage of free devices that failed (%) = 200 %
 there is line here for early % aka Pearly
 there is line here for late % aka Plate
 there is line here for avg late pen aka latePen

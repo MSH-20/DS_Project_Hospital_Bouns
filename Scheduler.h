@@ -211,15 +211,30 @@ public:
 		else         // in case In_Treatment has only one patient
 		{
 			In_Treatment.peek(P2, dummy);
-			if (P2->getAttachedResource()->getType() == E)
+			P2->getFirstRequired(T);
+			if (T->getTypet() == E)
 			{
+				P2->setW();
 				In_Treatment.dequeue(P2, dummy);
 				E_Interrupted_Patients.enqueue(P2, dummy);
+				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
+				Resources* R = P2->getAttachedResource();
+				R->decAttachedPatientsCount();
+				R->setFT();
+				E_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+				P2->removeAttachedResource();
 			}
-			if (P2->getAttachedResource()->getType() == U)
+			else if (T->getTypet() == U)
 			{
+				P2->setW();
 				In_Treatment.dequeue(P2, dummy);
 				U_Interrupted_Patients.enqueue(P2, dummy);
+				T->setDuration(T->getDuration() - (timestep - T->getAssignmentTime()));
+				Resources* R = P2->getAttachedResource();
+				R->decAttachedPatientsCount();
+				R->setFT();
+				U_Maintenance_Devices.enqueue(R, -timestep - R->getMaintenance_Time());
+				P2->removeAttachedResource();
 			}
 		}
 	}
@@ -766,14 +781,17 @@ public:
 						X_Devices.enqueue(R);
 					}
 					R->decAttachedPatientsCount();
+					P2->removeAttachedResource();
 				}
 				else if (R->getType() == E) {
 					R->decAttachedPatientsCount();
 					E_Devices.enqueue(R);
+					P2->removeAttachedResource();
 				}
 				else if (R->getType() == U) {
 					R->decAttachedPatientsCount();
 					U_Devices.enqueue(R);
+					P2->removeAttachedResource();
 				}
 				if (P->istypeN()) {
 					P->removeFirstRequired(T);
