@@ -135,7 +135,7 @@ public:
         cin.ignore();
     }
 
-    void outputfile(ArrayStack<Patient*>& Patients, int timestep)
+    void outputfile(ArrayStack<Patient*>& Patients, LinkedQueue<Resources*>& E_Devices, LinkedQueue<Resources*>& U_Deivces, int timestep)
     {
         string filename;
 
@@ -150,10 +150,10 @@ public:
         }
 
         outFile << "PID  PType PT   VT   FT   WT   TT   Cancel Resc" << endl;
-        float totalnumber, Nnumber, Rnumber, Wall, WR, WN, Tall, TN, TR, accCP, accRP;
+        float totalnumber, Nnumber, Rnumber, Wall, WR, WN, Tall, TN, TR, accCP, accRP, FDF, E_FDF, U_FDF;
         float Pearly, Plate, latePen;
 
-        totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = 0;
+        totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = E_FDF = U_FDF = FDF = 0;
 
         while (!Patients.isEmpty())
         {
@@ -298,6 +298,19 @@ public:
             }
             
         }
+        while (!E_Devices.isEmpty())
+        {
+            Resources* R;
+            if (E_Devices.dequeue(R))
+                E_FDF += R->getFT();
+        }
+
+        while (!E_Devices.isEmpty())
+        {
+            Resources* R;
+            if (U_Deivces.dequeue(R))
+                U_FDF += R->getFT();
+        }
 
         Wall /= totalnumber;
         Tall /= totalnumber;
@@ -311,6 +324,7 @@ public:
         accCP = accCP / totalnumber * 100;
         accRP = accRP / totalnumber * 100;
 
+        FDF = ((E_FDF + U_FDF) / (E_Devices.GetCount() + U_Deivces.GetCount())) * 100;
 
         outFile << "\nTotal number of timesteps = " << timestep << endl;
         outFile << "Total number of All, N, R = " << totalnumber << ", " << Nnumber << ", " << Rnumber << endl;
@@ -318,7 +332,13 @@ public:
         outFile << "Average total treatment time  of All, N, R = " << Tall << ", " << TN << ", " << TR << endl;
         outFile << "Percentage of patients that accepted cancellation (%) = " << accCP << " %\n";
         outFile << "Percentage of patients that accepted rescheduling (%) = " << accRP << " %\n";
-        
+
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
+        outFile << "Percentage of free devices that failed (%) = " << FDF << " %\n";
+        //outFile << "Percentage of patients that accepted rescheduling (%) = " << accRP << " %\n";
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
+
+
         outFile << "there is line here for early % aka Pearly\n";
         outFile << "there is line here for late % aka Plate\n";
         outFile << "there is line here for avg late pen aka latePen\n";

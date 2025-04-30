@@ -11,12 +11,22 @@ protected:
 	int ID;
 	Type type;
 	//--------------------------------------------------------Bouns-------------------------------------------------------//
+	int FT;              // number of Failed Times
 	int Maintenance_Time;
 public:
 
 	int getMaintenance_Time()
 	{
 		return Maintenance_Time;
+	}
+	int getFT()
+	{
+		return FT;
+	}
+
+	void setFT()
+	{
+		FT = 1;
 	}
 
 	//--------------------------------------------------------Bouns-------------------------------------------------------//
@@ -108,6 +118,7 @@ public:
 		type = E;
 		ID = nextID++;
 		Maintenance_Time = MT;
+		FT = 0;
 	}
 };
 
@@ -121,6 +132,7 @@ public:
 		type = U;
 		ID = nextID++;
 		Maintenance_Time = MT;
+		FT = 0;
 	}
 };
 ostream& operator<<(ostream& os, const Resources* p);

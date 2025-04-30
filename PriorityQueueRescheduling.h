@@ -2,7 +2,7 @@
 #include "priQueue.h"
 #include "Patient.h"
 #include <cstdlib>
-#include <ctime>
+#include <time.h>
 class PriorityQueueRescheduling : public priQueue<Patient*>
 {
 public:
