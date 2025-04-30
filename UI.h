@@ -304,6 +304,7 @@ public:
             
         }
 
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
         int E_Count = E_Devices.GetCount();
         int U_Count = U_Deivces.GetCount();
         while (!E_Devices.isEmpty())
@@ -319,6 +320,7 @@ public:
             if (U_Deivces.dequeue(R))
                 U_FDF += R->getFT();
         }
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
 
         Wall /= totalnumber;
         Tall /= totalnumber;
