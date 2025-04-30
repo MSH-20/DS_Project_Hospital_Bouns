@@ -13,6 +13,18 @@ protected:
 public:
     priQueue() : head(nullptr), count(0) {}
 
+    priQueue(const priQueue<T>& LQ)
+    {
+        head = nullptr;
+        int x;
+        priNode<T>* NodePtr = LQ.head;	//start at the front node in LQ
+        while (NodePtr)
+        {
+            enqueue(NodePtr->getItem(x), x);	//get data of each node and enqueue it in this queue 
+            NodePtr = NodePtr->getNext();
+        }
+    }
+
     ~priQueue() {
         T tmp;
         int p;
@@ -87,3 +99,7 @@ public:
         return head == nullptr;
     }
 };
+
+
+
+

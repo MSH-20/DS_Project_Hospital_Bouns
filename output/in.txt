@@ -1,0 +1,11 @@
+PID  PType PT   VT   FT   WT   TT   Cancel Resc
+
+Total number of timesteps = 0
+Total number of All, N, R = 0, 0, 0
+Average total waiting time of All, N, R = -nan(ind), -nan(ind), -nan(ind)
+Average total treatment time  of All, N, R = -nan(ind), -nan(ind), -nan(ind)
+Percentage of patients that accepted cancellation (%) = -nan(ind) %
+Percentage of patients that accepted rescheduling (%) = -nan(ind) %
+there is line here for early % aka Pearly
+there is line here for late % aka Plate
+there is line here for avg late pen aka latePen

@@ -24,6 +24,10 @@ public:
 	}
 
     void printConsle(int timestep,
+        const priQueue<Resources*>& E_Maintenance_Devices,
+        const priQueue<Resources*>& U_Maintenance_Devices,
+        const priQueue<Patient*>& E_Interrupted_Patients,
+        const priQueue<Patient*>& U_Interrupted_Patients,
         const LinkedQueue<Patient*>& Patients,
         const LinkedQueue<Resources*>& X_Deivces,
         const LinkedQueue<Resources*>& E_Devices,
@@ -76,6 +80,16 @@ public:
         Late_Patients.PrintPriQueue();
         cout << endl;
 
+        cout << "================= E_Interrupted_Patients List =================" << endl;
+        cout << E_Interrupted_Patients.GetCount() << " patients: ";
+        E_Interrupted_Patients.PrintPriQueue();
+        cout << endl;
+
+        cout << "================= U_Interrupted_Patients List =================" << endl;
+        cout << U_Interrupted_Patients.GetCount() << " patients: ";
+        U_Interrupted_Patients.PrintPriQueue();
+        cout << endl;
+
         cout << "================ Avail E-devices ================" << endl;
         int eCount = E_Devices.GetCount();
         cout << eCount << " Electro device: ";
@@ -92,6 +106,18 @@ public:
         int xCount = X_Deivces.GetCount();
         cout << xCount << " rooms: ";
         X_Deivces.PrintQueue();
+        cout << endl;
+
+        cout << "================ E_Maintenance_Devices ================" << endl;
+        int eMinCount = E_Maintenance_Devices.GetCount();
+        cout << eMinCount << " Electro device In Maintenance: ";
+        E_Maintenance_Devices.PrintPriQueue();
+        cout << endl;
+
+        cout << "================ U_Maintenance_Devices ================" << endl;
+        int uMinCount = U_Maintenance_Devices.GetCount();
+        cout << uMinCount << " Ultra device In Maintenance: ";
+        U_Maintenance_Devices.PrintPriQueue();
         cout << endl;
 
         cout << "============== In-treatment List ================" << endl;
