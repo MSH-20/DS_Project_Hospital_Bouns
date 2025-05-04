@@ -853,20 +853,16 @@ public:
 
         totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = IP = E_FDF = U_FDF = FDF = 0;
 
-        while (!Patients.isEmpty())
-        {
-
-
 			while (!Finished_Patients.isEmpty())
 			{
 				Patient* temp;
 				Finished_Patients.pop(temp);
 
-			//--------------------------------------------------------Bouns-------------------------------------------------------//
+				//--------------------------------------------------------Bouns-------------------------------------------------------//
 				IP += temp->getIP();
-            //--------------------------------------------------------Bouns-------------------------------------------------------//
+				//--------------------------------------------------------Bouns-------------------------------------------------------//
 
-	
+
 				if (temp->getPID() < 10)
 				{
 					outFile << "P" << temp->getPID() << "   ";
@@ -883,7 +879,7 @@ public:
 					outFile << "N" << "     ";
 				if (temp->istypeR())
 					outFile << "R" << "     ";
-	
+
 				if (temp->getPT() < 10)
 				{
 					outFile << temp->getPT() << "    ";
@@ -900,7 +896,7 @@ public:
 				{
 					outFile << temp->getPT() << " ";
 				}
-	
+
 				if (temp->getVT() < 10)
 				{
 					outFile << temp->getVT() << "    ";
@@ -917,7 +913,7 @@ public:
 				{
 					outFile << temp->getVT() << " ";
 				}
-	
+
 				if (temp->getFT() < 10)
 				{
 					outFile << temp->getFT() << "    ";
@@ -934,7 +930,7 @@ public:
 				{
 					outFile << temp->getFT() << " ";
 				}
-	
+
 				if (temp->getfinalTW() < 10)
 				{
 					outFile << temp->getfinalTW() << "    ";
@@ -951,7 +947,7 @@ public:
 				{
 					outFile << temp->getfinalTW() << " ";
 				}
-	
+
 				if (temp->getTT() < 10)
 				{
 					outFile << temp->getTT() << "    ";
@@ -968,7 +964,7 @@ public:
 				{
 					outFile << temp->getTT() << " ";
 				}
-	
+
 				if (temp->isCanceled())
 				{
 					outFile << "T      ";
@@ -987,7 +983,7 @@ public:
 				{
 					outFile << "F\n";
 				}
-	
+
 				++totalnumber;
 				Wall += temp->getfinalTW();
 				Tall += temp->getTT();
@@ -1003,7 +999,7 @@ public:
 					WR += temp->getfinalTW();
 					TR += temp->getTT();
 				}
-	
+
 				if (temp->isEarly())
 					++Pearly;
 				else if (temp->isLate())
@@ -1011,13 +1007,15 @@ public:
 					++Plate;
 					latePen += temp->getWaitTimeOfPatient();
 				}
-	
-	
+
+
 			}
+		
 
         //--------------------------------------------------------Bouns-------------------------------------------------------//
         int E_Count = E_Devices.GetCount();
-        int U_Count = U_Deivces.GetCount();
+        int U_Count = U_Devices.GetCount();
+
         while (!E_Devices.isEmpty())
         {
             Resources* R;
@@ -1025,10 +1023,10 @@ public:
                 E_FDF += R->getFT();
         }
 
-        while (!U_Deivces.isEmpty())
+        while (!U_Devices.isEmpty())
         {
             Resources* R;
-            if (U_Deivces.dequeue(R))
+            if (U_Devices.dequeue(R))
                 U_FDF += R->getFT();
         }
         //--------------------------------------------------------Bouns-------------------------------------------------------//
