@@ -588,7 +588,7 @@ public:
 				//}
 				if (!Free_Failure(R, timestep))
 				{
-					if (U_Devices.dequeue(R))
+					if (E_Devices.dequeue(R))
 					{
 						R->incAttachedPatientsCount();
 						P3->addAttachedResource(R);
