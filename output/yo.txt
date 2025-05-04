@@ -14,8 +14,8 @@ P30  R     78   68   112  12   32   F      F
 P38  R     83   81   109  4    24   F      F
 P49  N     100  95   107  6    6    F      F
 P40  N     75   82   106  12   12   F      F
-P35  N     84   78   105  8    19   F      F
 P28  R     56   65   105  16   24   F      F
+P35  N     84   78   105  8    19   F      F
 P27  N     57   65   104  19   20   F      F
 P42  N     93   85   104  8    11   F      F
 P33  N     69   73   102  8    21   F      F
@@ -26,8 +26,8 @@ P36  N     77   78   92   2    12   F      F
 P26  R     62   63   87   16   8    F      F
 P22  N     57   56   84   11   17   F      F
 P18  N     48   49   84   7    28   F      F
-P25  N     59   62   82   7    13   F      F
 P24  N     59   61   82   6    15   F      F
+P25  N     59   62   82   7    13   F      F
 P21  R     53   56   81   6    19   F      F
 P15  N     34   42   79   13   24   F      F
 P23  N     64   58   77   6    13   F      F
@@ -58,6 +58,6 @@ Percentage of patients that accepted cancellation (%) = 0 %
 Percentage of patients that accepted rescheduling (%) = 0 %
 Percentage of free devices that failed (%) = 100 %
 Percentage of Interrupted patients (%) = 72 %
-there is line here for early % aka Pearly
-there is line here for late % aka Plate
-there is line here for avg late pen aka latePen
+Percentage of early patients (%) = 44 %
+Percentage of late patients (%) = 50 %
+Average late penalty = 7.2 timestep(s)

@@ -1048,6 +1048,7 @@ public:
 		Pearly = Pearly / totalnumber * 100;
 		Plate  = Plate / totalnumber * 100;
 
+		FDF = ((E_FDF + U_FDF + (E_Maintenance_Devices.GetCount() + U_Maintenance_Devices.GetCount())) / (E_Count + U_Count + E_Maintenance_Devices.GetCount() + U_Maintenance_Devices.GetCount())) * 100;
 
 		outFile << "\nTotal number of timesteps = " << timestep << endl;
 		outFile << "Total number of All, N, R = " << totalnumber << ", " << Nnumber << ", " << Rnumber << endl;
