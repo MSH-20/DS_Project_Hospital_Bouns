@@ -114,6 +114,14 @@ public:
 	void setF() {
 		PS = FNSH;
 	}
+	bool isEarly()
+	{
+		return VT < PT;
+	}
+	bool isLate()
+	{
+		return VT > PT;
+	}
 	bool istypeN() const {
 		return typeN;
 	}

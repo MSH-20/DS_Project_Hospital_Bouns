@@ -275,10 +275,8 @@ public:
 		X_Waiting_Patients.insertSorted(-timestep, P);
 	}
 
-	void ReadInput(char& mode)
-	{
-
-		string filename = ui.getFileName(mode);
+	void ReadInput(string filename)
+ 	{
 
 		filename = "input files\\" + filename + ".txt";
 
@@ -443,7 +441,11 @@ public:
 	void simulation()
 	{
 		char mode;
-		ReadInput(mode);
+
+		string filename;
+		filename = ui.getFileName(mode);
+		ReadInput(filename);
+
 		int timestep = 0;
 		int c = All_Patients.GetCount();
 		Patient* P;
@@ -831,9 +833,246 @@ public:
 			timestep++;
 			Finished_PatientsCount = Finished_Patients.GetCount();
 		}
-		ui.outputfile(Finished_Patients, E_Devices, U_Devices, E_Maintenance_Devices, U_Maintenance_Devices, timestep);
+ 		filename = ui.outputfile();
+  		MakeOutFile(filename, timestep);
 
 	}
 
-	~Scheduler() {};
+	void MakeOutFile(string filename, int timestep)
+	{
+
+  		ofstream outFile(filename);
+  		if (!outFile) {
+  			cout << "Error creating file!" << endl;
+  			return;
+  		} 
+
+        outFile << "PID  PType PT   VT   FT   WT   TT   Cancel Resc" << endl;
+        float totalnumber, Nnumber, Rnumber, Wall, WR, WN, Tall, TN, TR, accCP, accRP, IP, FDF, E_FDF, U_FDF;
+        float Pearly, Plate, latePen;
+
+        totalnumber =  Nnumber = Rnumber = Wall = WR = WN = Tall = TN = TR = accCP = accRP = Pearly = Plate = latePen = IP = E_FDF = U_FDF = FDF = 0;
+
+        while (!Patients.isEmpty())
+        {
+
+
+			while (!Finished_Patients.isEmpty())
+			{
+				Patient* temp;
+				Finished_Patients.pop(temp);
+
+			//--------------------------------------------------------Bouns-------------------------------------------------------//
+				IP += temp->getIP();
+            //--------------------------------------------------------Bouns-------------------------------------------------------//
+
+	
+				if (temp->getPID() < 10)
+				{
+					outFile << "P" << temp->getPID() << "   ";
+				}
+				else if (temp->getPID() < 100)
+				{
+					outFile << "P" << temp->getPID() << "  ";
+				}
+				else
+				{
+					outFile << "P" << temp->getPID() << " ";
+				}
+				if (temp->istypeN())
+					outFile << "N" << "     ";
+				if (temp->istypeR())
+					outFile << "R" << "     ";
+	
+				if (temp->getPT() < 10)
+				{
+					outFile << temp->getPT() << "    ";
+				}
+				else if (temp->getPT() < 100)
+				{
+					outFile << temp->getPT() << "   ";
+				}
+				else if (temp->getPT() < 1000)
+				{
+					outFile << temp->getPT() << "  ";
+				}
+				else
+				{
+					outFile << temp->getPT() << " ";
+				}
+	
+				if (temp->getVT() < 10)
+				{
+					outFile << temp->getVT() << "    ";
+				}
+				else if (temp->getVT() < 100)
+				{
+					outFile << temp->getVT() << "   ";
+				}
+				else if (temp->getVT() < 1000)
+				{
+					outFile << temp->getVT() << "  ";
+				}
+				else
+				{
+					outFile << temp->getVT() << " ";
+				}
+	
+				if (temp->getFT() < 10)
+				{
+					outFile << temp->getFT() << "    ";
+				}
+				else if (temp->getFT() < 100)
+				{
+					outFile << temp->getFT() << "   ";
+				}
+				else if (temp->getFT() < 1000)
+				{
+					outFile << temp->getFT() << "  ";
+				}
+				else
+				{
+					outFile << temp->getFT() << " ";
+				}
+	
+				if (temp->getfinalTW() < 10)
+				{
+					outFile << temp->getfinalTW() << "    ";
+				}
+				else if (temp->getfinalTW() < 100)
+				{
+					outFile << temp->getfinalTW() << "   ";
+				}
+				else if (temp->getfinalTW() < 1000)
+				{
+					outFile << temp->getfinalTW() << "  ";
+				}
+				else
+				{
+					outFile << temp->getfinalTW() << " ";
+				}
+	
+				if (temp->getTT() < 10)
+				{
+					outFile << temp->getTT() << "    ";
+				}
+				else if (temp->getTT() < 100)
+				{
+					outFile << temp->getTT() << "   ";
+				}
+				else if (temp->getTT() < 1000)
+				{
+					outFile << temp->getTT() << "  ";
+				}
+				else
+				{
+					outFile << temp->getTT() << " ";
+				}
+	
+				if (temp->isCanceled())
+				{
+					outFile << "T      ";
+					++accCP;
+				}
+				else
+				{
+					outFile << "F      ";
+				}
+				if (temp->isRescheduled())
+				{
+					outFile << "T\n";
+					++accRP;
+				}
+				else
+				{
+					outFile << "F\n";
+				}
+	
+				++totalnumber;
+				Wall += temp->getfinalTW();
+				Tall += temp->getTT();
+				if (temp->istypeN())
+				{
+					++Nnumber;
+					WN += temp->getfinalTW();
+					TN += temp->getTT();
+				}
+				else
+				{
+					++Rnumber;
+					WR += temp->getfinalTW();
+					TR += temp->getTT();
+				}
+	
+				if (temp->isEarly())
+					++Pearly;
+				else if (temp->isLate())
+				{
+					++Plate;
+					latePen += temp->getWaitTimeOfPatient();
+				}
+	
+	
+			}
+
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
+        int E_Count = E_Devices.GetCount();
+        int U_Count = U_Deivces.GetCount();
+        while (!E_Devices.isEmpty())
+        {
+            Resources* R;
+            if (E_Devices.dequeue(R))
+                E_FDF += R->getFT();
+        }
+
+        while (!U_Deivces.isEmpty())
+        {
+            Resources* R;
+            if (U_Deivces.dequeue(R))
+                U_FDF += R->getFT();
+        }
+        //--------------------------------------------------------Bouns-------------------------------------------------------//
+
+		Wall /= totalnumber;
+		Tall /= totalnumber;
+
+		WN /= Nnumber;
+		TN /= Nnumber;
+
+		WR /= Rnumber;
+		TR /= Rnumber;
+
+		accCP = accCP / totalnumber * 100;
+		accRP = accRP / totalnumber * 100;
+
+		latePen /= Plate;
+
+		Pearly = Pearly / totalnumber * 100;
+		Plate  = Plate / totalnumber * 100;
+
+
+		outFile << "\nTotal number of timesteps = " << timestep << endl;
+		outFile << "Total number of All, N, R = " << totalnumber << ", " << Nnumber << ", " << Rnumber << endl;
+		outFile << "Average total waiting time of All, N, R = " << Wall << ", " << WN << ", " << WR << endl;   // wrong logic
+		outFile << "Average total treatment time  of All, N, R = " << Tall << ", " << TN << ", " << TR << endl; // wrong logic
+		outFile << "Percentage of patients that accepted cancellation (%) = " << accCP << " %\n";
+		outFile << "Percentage of patients that accepted rescheduling (%) = " << accRP << " %\n";
+
+		        //--------------------------------------------------------Bouns-------------------------------------------------------//
+				outFile << "Percentage of free devices that failed (%) = " << FDF << " %\n";
+				outFile << "Percentage of Interrupted patients (%) = " << ((IP/totalnumber) * 100) << " %\n";
+				//--------------------------------------------------------Bouns-------------------------------------------------------//
+
+		outFile << "Percentage of early patients (%) = " << Pearly << " %\n";
+		outFile << "Percentage of late patients (%) = " << Plate << " %\n";
+		outFile << "Average late penalty = " << latePen << " timestep(s)\n";
+
+		outFile.close();
+
+		cout << "\nFile created at: " << filename << endl << endl;
+
+		return;
+    }
+
+	~Scheduler() {}
 };
