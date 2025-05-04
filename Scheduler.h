@@ -49,11 +49,16 @@ private:
 
 public:
 
+	Scheduler()
+	{
+		srand(time(0));
+	}
+
 	bool Free_Failure(Resources* R, int timestep)
 	{
 		if (R)
 		{
-			srand(time(0));
+			 
 			int X;
 			X = rand() % 101;
 			if (X < PFreeFail)
@@ -97,7 +102,7 @@ public:
 		}
 		else
 		{
-			srand(time(0));
+			 
 			x = ((rand()) % y) + 1;
 		}
 
@@ -128,7 +133,7 @@ public:
 						y--;
 						if (y)
 						{
-							srand(time(0));
+							 
 							x = ((rand()) % y) + 1;
 						}
 					}
@@ -487,7 +492,7 @@ public:
 				}
 			}
 
-			srand(time(0));
+			 
 			int X = rand() % 101;
 			if (X < PCancel)//cancel case
 			{
@@ -501,7 +506,7 @@ public:
 				}
 			}
 
-			//srand(time(0));
+			// 
 			//X = rand() % 101;
 			//if (X < PReschedule)//reschedule case
 			//{
@@ -512,7 +517,7 @@ public:
 
 
 			//----------------------------------------------------Bouns-------------------------------------------------------//
-			srand(time(0));
+			 
 			X = rand() % 101;
 			if (X < PBusyFail)
 			{
@@ -578,35 +583,18 @@ public:
 			while (E_Devices.peek(R) && E_Interrupted_Patients.peek(P3, dummy)) { //going out of E_Interrupted_Patients to In_treatment
 				P3->setS();
 				E_Devices.dequeue(R);
-				//bool x = false;
-				//while ((!x) && (!Free_Failure(R, timestep)))
-				//{
-				//	if (!E_Devices.dequeue(R))
-				//	{
-				//		x = true;
-				//	}
-				//}
-				if (!Free_Failure(R, timestep))
+				bool x = false;
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
-					if (E_Devices.dequeue(R))
+					if (!E_Devices.dequeue(R))
 					{
-						R->incAttachedPatientsCount();
-						P3->addAttachedResource(R);
-						P3->getFirstRequired(T);
-						if (T)
-						{
-							In_Treatment.enqueue(P3, -timestep - (T->getDuration()));
-							T->setAssignmentTime(timestep);
-						}
-						E_Interrupted_Patients.dequeue(P3, dummy);
-					}
-					else
-					{
-						P3->setW();
+						x = true;
 					}
 				}
-				else
+				if (!x)
 				{
+
+
 					R->incAttachedPatientsCount();
 					P3->addAttachedResource(R);
 					P3->getFirstRequired(T);
@@ -616,41 +604,29 @@ public:
 						T->setAssignmentTime(timestep);
 					}
 					E_Interrupted_Patients.dequeue(P3, dummy);
+
 				}
+					else
+					{
+						P3->setW();
+					}
 			}
 
 			while (U_Devices.peek(R) && U_Interrupted_Patients.peek(P3, dummy)) {//going out of U_Interrupted_Patients to In_treatment
 				P3->setS();
 				U_Devices.dequeue(R);
-				//bool x = false;
-				//while ((!x) && (!Free_Failure(R, timestep)))
-				//{
-				//	if (!U_Devices.dequeue(R))
-				//	{
-				//		x = true;
-				//	}
-				//}
-				if (!Free_Failure(R, timestep))
+				bool x = false;
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
-					if (U_Devices.dequeue(R))
+					if (!U_Devices.dequeue(R))
 					{
-						R->incAttachedPatientsCount();
-						P3->addAttachedResource(R);
-						P3->getFirstRequired(T);
-						if (T)
-						{
-							In_Treatment.enqueue(P3, -timestep - (T->getDuration()));
-							T->setAssignmentTime(timestep);
-						}
-						U_Interrupted_Patients.dequeue(P3, dummy);
-					}
-					else
-					{
-						P3->setW();
+						x = true;
 					}
 				}
-				else
+				if (!x)
 				{
+
+
 					R->incAttachedPatientsCount();
 					P3->addAttachedResource(R);
 					P3->getFirstRequired(T);
@@ -660,6 +636,11 @@ public:
 						T->setAssignmentTime(timestep);
 					}
 					U_Interrupted_Patients.dequeue(P3, dummy);
+
+				}
+				else
+				{
+					P3->setW();
 				}
 			}
 
@@ -667,35 +648,18 @@ public:
 			while (E_Devices.peek(R) && E_Waiting_Patients.peek(P3)) { //going out of E_waiting to In_treatment
 				P3->setS();
 				E_Devices.dequeue(R);
-				//bool x = false;
-				//while ((!x) && (!Free_Failure(R, timestep)))
-				//{
-				//	if (!E_Devices.dequeue(R))
-				//	{
-				//		x = true;
-				//	}
-				//}
-				if (!Free_Failure(R, timestep))
+				bool x = false;
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
-					if (E_Devices.dequeue(R))
+					if (!E_Devices.dequeue(R))
 					{
-						R->incAttachedPatientsCount();
-						P3->addAttachedResource(R);
-						P3->getFirstRequired(T);
-						if (T)
-						{
-							In_Treatment.enqueue(P3, -timestep - (T->getDuration()));
-							T->setAssignmentTime(timestep);
-						}
-						E_Waiting_Patients.dequeue(P3);
-					}
-					else
-					{
-						P3->setW();
+						x = true;
 					}
 				}
-				else
+				if (!x)
 				{
+
+
 					R->incAttachedPatientsCount();
 					P3->addAttachedResource(R);
 					P3->getFirstRequired(T);
@@ -705,6 +669,11 @@ public:
 						T->setAssignmentTime(timestep);
 					}
 					E_Waiting_Patients.dequeue(P3);
+
+				}
+				else
+				{
+					P3->setW();
 				}
 
 			}
@@ -715,36 +684,18 @@ public:
 			while (U_Devices.peek(R) && U_Waiting_Patients.peek(P3)) {//going out of U_waiting to In_treatment
 				P3->setS();
 				U_Devices.dequeue(R);
-				//bool x = false;
-				//while ((!x) && (!Free_Failure(R, timestep)))
-				//{
-				//	if (!U_Devices.dequeue(R))
-				//	{
-				//		x = true;
-				//	}
-				//}
-				//if (!x)
-				if (!Free_Failure(R, timestep))
+				bool x = false;
+				while ((!x) && (!Free_Failure(R, timestep)))
 				{
-					if (U_Devices.dequeue(R))
+					if (!U_Devices.dequeue(R))
 					{
-						R->incAttachedPatientsCount();
-						P3->addAttachedResource(R);
-						P3->getFirstRequired(T);
-						if (T)
-						{
-							In_Treatment.enqueue(P3, -timestep - (T->getDuration()));
-							T->setAssignmentTime(timestep);
-						}
-						U_Waiting_Patients.dequeue(P3);
-					}
-					else
-					{
-						P3->setW();
+						x = true;
 					}
 				}
-				else
+				if (!x)
 				{
+
+
 					R->incAttachedPatientsCount();
 					P3->addAttachedResource(R);
 					P3->getFirstRequired(T);
@@ -754,6 +705,11 @@ public:
 						T->setAssignmentTime(timestep);
 					}
 					U_Waiting_Patients.dequeue(P3);
+
+				}
+				else
+				{
+					P3->setW();
 				}
 
 			}

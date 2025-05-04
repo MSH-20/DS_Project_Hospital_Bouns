@@ -6,7 +6,6 @@ class QueueSortedWithCancel : public QueueSorted {
 public:
 	bool cancel(Patient*& T) {
 		{
-			srand(time(0));
 			int x;
 			if (this->frontPtr == nullptr) {
 				return false;
@@ -81,7 +80,7 @@ public:
 	}
 	bool cancel2(Patient*& T) {
 		{
-			srand(time(0));
+			 
 			int x;
 			if (this->frontPtr == nullptr) {
 				return false;

@@ -7,7 +7,6 @@ class PriorityQueueRescheduling : public priQueue<Patient*>
 {
 public:
 	bool Reschedule(Patient*& Temp) {
-		srand(time(0));
 		int x;
 		if (this->head == nullptr) {
 			return false;
